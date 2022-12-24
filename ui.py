@@ -65,5 +65,8 @@ class UI:
         return [0, score]
 
     def show_score(self):
-        print(self.score.get_scores())
+        score_list = self.score.get_scores()
+        # cap
+        score = f"----------------------------\n|    |   |   ||   |   |    |\n|    |   |   ||   |   |    |\n|{score_list[0][2]}|   |   ||   |   |{score_list[2][3]}|\n|    |   |   ||   |   |    |\n|    |   |{score_list[0][0]}||{score_list[2][0]}|   |    |\n|    |   |   ||   |   |    |\n|    |{score_list[0][1]}|   ||   |{score_list[2][1]}|    |\n|----|   |   ||   |   |----|\n|    |   |   ||   |   |    |\n|    |   |   ||   |   |    |\n|    |   |  /  \  |   |    |\n|{score_list[0][3]}|   | /{score_list[1][0]}\ |   |{score_list[2][2]}|\n|    |   |/------\|   |    |\n|    |   /        \   |    |\n|    |  /   {score_list[1][1]}   \  |    |\n|    | /            \ |    |\n|    |/--------------\|    |\n|    /        |       \    |\n|   /         |        \   |\n|  /    {score_list[1][2]}  |  {score_list[1][3]}   \  |\n| /           |          \ |\n|/            |           \|\n----------------------------\n"
+        print(score)
         return 0

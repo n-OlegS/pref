@@ -78,7 +78,7 @@ class Manager:
 
         ind = 3
         for i in [pars[0] - 1, pars[0] - 2]:
-            if i < 0: i = 2
+            if i < 0: i += 3
             if not pars[ind]: continue
             ind -= 1
 
@@ -104,7 +104,7 @@ class Manager:
 
             else:
                 players = []
-                i = pars[0]
+                i = pars[0] - 1
 
                 for _ in range(2):
                     if i < 0: i = 2
