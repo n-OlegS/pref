@@ -27,12 +27,28 @@ class UI:
             whist_2 = bool(code[5] == "w")
             return [0, 1, [player, num, suit, whist_1, whist_2]]
 
+    def request_save(self):
+        if self.score.path_exists:
+            self.score.save(self.score.path)
+        else:
+            try:
+                self.score.save(input("Enter save path: "))
+            except Exception:
+                print("Invalid path...")
+                self.request_save()
+
     def request_names(self):
         names = input("Enter names, separated by a space: ").split()
         self.playernames = names
         for i in range(3):
             self.namedict[names[i][0]] = i
         return 0, names
+
+    def set_namedict(self, names):
+        for i in range(3):
+            self.namedict[names[i][0]] = i
+
+        return 0
 
     @staticmethod
     def request_cost():

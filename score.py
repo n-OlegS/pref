@@ -1,9 +1,11 @@
-from ui import UI
+import json
 
 
 class Score:
     def __init__(self, ui, state=None):
         self.ui = ui
+        self.path_exists = bool(state is not None)
+        self.path = state
 
         if state is None:
             pnames = self.ui.request_names()[1]
@@ -11,16 +13,37 @@ class Score:
             pscores = [[0, 0, 0, 0] for _ in range(3)]
             cost = self.ui.request_cost()[1]
 
-        else:
-            pass
+            self.pnames = pnames
+            self.pscores = pscores
+            self.cost = cost
+            self.bullet_cap = cap
 
-        self.pnames = pnames
-        self.pscores = pscores
-        self.cost = cost
-        self.bullet_cap = cap
+        else:
+            state_d = json.load(open(state, 'r'))
+
+            self.pnames = state_d["names"]
+            self.pscores = state_d["scores"]
+            self.cost = state_d["cost"]
+            self.bullet_cap = state_d["cap"]
+
+            self.ui.set_namedict(self.pnames)
 
     def __str__(self):
         return "Method should be called with UI!"
+
+    def save(self, path):
+        # Form dict
+
+        state = {
+            "names": self.pnames,
+            "scores": self.pscores,
+            "cost": self.cost,
+            "cap": self.bullet_cap
+        }
+
+        json.dump(state, open(path, 'w'))
+
+        return 0
 
     def get_scores(self):
         return self.pscores.copy()
