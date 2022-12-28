@@ -78,11 +78,12 @@ class Manager:
 
         ind = 3
         for i in [pars[0] - 1, pars[0] - 2]:
-            if i < 0: i += 3
+            k = i
+            if k < 0: k += 3
             if not pars[ind]: continue
-            ind -= 1
 
-            score[i][self.refer_dict[str(i) + str(pars[0])]] += scores[i] * self.cost_dict[pars[1]]
+            score[k][self.refer_dict[str(i) + str(pars[0])]] += scores[i] * self.cost_dict[pars[1]]
+            ind += 1
 
         self.score.set_scores(score)
 

@@ -27,6 +27,20 @@ class UI:
             whist_2 = bool(code[5] == "w")
             return [0, 1, [player, num, suit, whist_1, whist_2]]
 
+    def display_endgame(self, finals):
+        for i in range(3):
+            right = i + 1
+            left = i - 1
+            if left < 0: left += 3
+            if right > 2: right -= 3
+
+            print(f"{self.playernames[i]} to {self.playernames[left]}: {finals[i][0]}")
+            print(f"{self.playernames[i]} to {self.playernames[right]}: {finals[i][1]}")
+
+        self.show_score()
+        self.request_save()
+        quit()
+
     def request_save(self):
         if self.score.path_exists:
             self.score.save(self.score.path)
@@ -82,8 +96,9 @@ class UI:
 
     @staticmethod
     def cap(inp, length):
-        inp = str(inp)
+        inp = str(int(inp))
         if len(inp) > length:
+            print(inp, length)
             raise AttributeError
         else:
             return "0" * (length - len(inp)) + inp
