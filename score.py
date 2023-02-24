@@ -103,6 +103,27 @@ class Score:
 
         return finals
 
+    def get_score_template(self):
+        template = []
+        for _ in range(3): template.append([0, 0, 0, 0])
+
+        return template
+
+    def receive_update(self, update):
+        score = self.get_scores()
+
+        for i in range(3):
+            score[i][0] += update[i][0]
+            score[i][2] += update[i][2]
+            score[i][3] += update[i][3]
+
+        self.set_scores(score)
+
+        for i in range(3):
+            self.bullet_write(i, update[i][1])
+
+        return 0
+
     def bullet_write(self, player, amount):
         score = self.get_scores()
 
